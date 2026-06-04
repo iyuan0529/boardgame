@@ -1,92 +1,96 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1,user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="妗屾父鍔╂墜">
-<link rel="manifest" href="/boardgame/manifest.json">
+<meta name="apple-mobile-web-app-title" content="桌游助手">
+<link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <link rel="icon" type="image/png" href="icons/favicon.png">
-<title>妗屾父鍔╂墜</title>
+<title>桌游助手</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <div id="bg-dots"></div>
 <div class="timer-flash-overlay" id="timerFlash"></div>
 <div class="page active" id="pageHome">
-  <div class="head">妗屾父鍔╂墜</div>
+  <div class="head">🎲 桌游助手</div>
   <div class="home-grid">
-    <div class="app-item" onclick="go('pagePlayer')"><div class="icon" style="background:#e8f0fe">馃懁</div><p>鐜╁璁剧疆</p></div>
-    <div class="app-item" onclick="go('pageStart')"><div class="icon" style="background:#ffe5e5">馃幉</div><p>璧峰鐜╁</p></div>
-    <div class="app-item" onclick="go('pageCard')"><div class="icon" style="background:#e8f8e8">馃儚</div><p>鍗＄墝鎶藉彇</p></div>
-    <div class="app-item" onclick="go('pageRole')"><div class="icon" style="background:#fff3e0">馃幁</div><p>韬唤鍒嗛厤</p></div>
-    <div class="app-item" onclick="go('pageTimer')"><div class="icon" style="background:#f3e8ff">鈴憋笍</div><p>娓告垙璁℃椂</p></div>
-    <div class="app-item" onclick="go('pageScore')"><div class="icon" style="background:#fffacd">馃弳</div><p>璁″垎鏉?/p></div>
-    <div class="app-item" onclick="go('pageWord')"><div class="icon" style="background:#e0f7fa">馃摉</div><p>鐚滆瘝</p></div>
-    <div class="app-item" onclick="window.location.href='stockpile/index.html'"><div class="icon" style="background:#c8e6c9">馃搱</div><p>鑲″競棰勬祴</p></div>
+    <div class="app-item" onclick="go('pagePlayer')"><div class="icon" style="background:#1a1a3e">👤</div><p>玩家设置</p></div>
+    <div class="app-item" onclick="go('pageStart')"><div class="icon" style="background:#1a1a3e">🎲</div><p>起始玩家</p></div>
+    <div class="app-item" onclick="go('pageCard')"><div class="icon" style="background:#1a1a3e">🃏</div><p>卡牌抽取</p></div>
+    <div class="app-item" onclick="go('pageRole')"><div class="icon" style="background:#1a1a3e">🎭</div><p>身份分配</p></div>
+    <div class="app-item" onclick="go('pageTimer')"><div class="icon" style="background:#1a1a3e">⏱️</div><p>游戏计时</p></div>
+    <div class="app-item" onclick="go('pageScore')"><div class="icon" style="background:#1a1a3e">🏳️</div><p>计分板</p></div>
+    <div class="app-item" onclick="go('pageWord')"><div class="icon" style="background:#1a1a3e">📋</div><p>猜词</p></div>
+    <div class="app-item" onclick="window.location.href='stockpile/index.html'"><div class="icon" style="background:#1a1a3e">📈</div><p>股市预测</p></div>
   </div>
 </div>
 <div class="page" id="pagePlayer">
-  <div class="head">馃懁 鐜╁璁剧疆</div>
+  <div class="head">👤 玩家设置</div>
   <div style="margin-bottom:12px">
-    <label style="font-size:14px;color:#8e8e93;font-weight:500">鐜╁鏁伴噺锛?-12锛?/label>
+    <label style="font-size:14px;color:var(--text-secondary);font-weight:500">玩家数量（1-12）：</label>
     <input type="number" id="playerCount" min="1" max="12" value="5" class="player-count-input">
   </div>
   <div id="playerList"></div>
-  <button class="save-set" onclick="savePlayers()">馃捑 淇濆瓨骞惰蹇?/button><div style="display:flex;gap:8px;margin-top:10px"><button class="save-set" onclick="exportData()" style="flex:1">馃摛 瀵煎嚭璁剧疆</button><button class="save-set" onclick="importData()" style="flex:1;background:linear-gradient(135deg,#34c759,#28a745)">馃摜 瀵煎叆璁剧疆</button></div>
-  <button class="back-btn" onclick="go('pageHome')">鈫?杩斿洖</button>
+  <button class="save-set" onclick="savePlayers()">💾 保存并记忆</button>
+  <div style="display:flex;gap:8px;margin-top:10px">
+    <button class="save-set" onclick="exportData()" style="flex:1">📛 导出设置</button>
+    <button class="save-set" onclick="importData()" style="flex:1;background:linear-gradient(135deg,#34c759,#28a745)">📜 导入设置</button>
+  </div>
+  <button class="back-btn" onclick="go('pageHome')">← 返回</button>
 </div>
 <div class="pop" id="avatarPop">
   <div class="pop-inner">
-    <h3>閫夋嫨澶村儚</h3>
+    <h3>选择头像</h3>
     <div class="avatar-grid-pop" id="avatarGridPop"></div>
-    <button class="pop-close" onclick="closeAvatarPop()">鍏抽棴</button>
+    <button class="pop-close" onclick="closeAvatarPop()">关闭</button>
   </div>
 </div>
 <div class="page" id="pageStart">
-    <button class="float-back" onclick="go('pageHome')">鈫?/button>
-  <button class="msg-toggle" id="lotMsgToggle" onclick="toggleMsgEditor()">鉁?/button>
-    <div class="lottery-full" id="lotFull" onclick="startLottery()">
-      <div class="lottery-content">
-        <div class="lottery-icon" id="lotIcon">馃幉</div>
-        <div class="lottery-name" id="lotTxt">鐐瑰嚮鎽囧彿</div>
-        <div class="lottery-sub" id="lotSub">鐐瑰嚮灞忓箷锛岄殢鏈烘娊鍙栬捣濮嬬帺瀹?/div>
-      </div>
-      <div class="lottery-ring" id="lotRing"></div>
+  <button class="float-back" onclick="go('pageHome')">←</button>
+  <button class="msg-toggle" id="lotMsgToggle" onclick="toggleMsgEditor()">✏️</button>
+  <div class="lottery-full" id="lotFull" onclick="startLottery()">
+    <div class="lottery-content">
+      <div class="lottery-icon" id="lotIcon">🎲</div>
+      <div class="lottery-name" id="lotTxt">点击摇号</div>
+      <div class="lottery-sub" id="lotSub">点击屏幕，随机抽取起始玩家</div>
     </div>
+    <div class="lottery-ring" id="lotRing"></div>
+  </div>
 </div>
 <div class="page" id="pageCard">
-  <div class="head">馃儚 鍗＄墝鎶藉彇</div>
-  <div style="text-align:center;font-size:14px;color:#8e8e93">鍓╀綑 <span id="cardRemain">17</span> 寮?/div>
+  <div class="head">🃏 卡牌抽取</div>
+  <div style="text-align:center;font-size:14px;color:var(--text-secondary)">剩余 <span id="cardRemain">17</span> 张</div>
   <div class="card-full">
     <div class="card-wrap" id="cardWrap" onclick="flipCard()">
-      <div class="card card-back"><img src="images/card/back.jpg" alt="鐗岃儗"></div>
-      <div class="card card-front"><img id="cardFrontImg" src="" alt="鐗岄潰"></div>
+      <div class="card card-back"><img src="images/card/back.jpg" alt="牌背"></div>
+      <div class="card card-front"><img id="cardFrontImg" src="" alt="牌面"></div>
     </div>
     <div class="card-empty" id="cardEmpty" style="display:none">
-      <div class="big">馃摥</div>
-      <div class="msg">鐗屽簱宸茬┖</div>
-      <div class="sub">鐐瑰嚮涓嬫柟銆岄噸缃墝搴撱€嶇户缁父鎴?/div>
+      <div class="big">📥</div>
+      <div class="msg">牌库已空</div>
+      <div class="sub">点击下方「重置牌库」继续游戏</div>
     </div>
   </div>
-  <button class="card-btn" onclick="showUsedCards()">馃搵 鏌ョ湅宸叉娊鍗＄墝</button>
-  <button class="card-btn reset-btn" onclick="resetCards()">鉄?閲嶇疆鐗屽簱</button>
-  <button class="back-btn" onclick="go('pageHome')">鈫?杩斿洖</button>
+  <button class="card-btn" onclick="showUsedCards()">📵 查看已抽卡牌</button>
+  <button class="card-btn reset-btn" onclick="resetCards()">🔄 重置牌库</button>
+  <button class="back-btn" onclick="go('pageHome')">← 返回</button>
 </div>
 <div class="pop" id="usedPop">
   <div class="pop-inner">
-    <h3>馃搵 宸叉娊鍙栧崱鐗?/h3>
+    <h3>📵 已抽取卡牌</h3>
     <div id="usedCardList" style="margin-top:12px;display:flex;flex-wrap:wrap"></div>
-    <button class="pop-close" onclick="closeUsed()">鍏抽棴</button>
+    <button class="pop-close" onclick="closeUsed()">关闭</button>
   </div>
 </div>
 <div class="big-card-view" id="bigCard" onclick="closeBigCard()">
   <div class="big-card-inner" id="bigCardTxt"></div>
 </div>
 <div class="page" id="pageTimer">
-  <div class="head">鈴憋笍 娓告垙璁℃椂</div>
+  <div class="head">⏱️ 游戏计时</div>
   <div class="timer-display-wrap" id="timerDisplayWrap">
     <svg width="200" height="200" class="timer-svg">
       <circle cx="100" cy="100" r="88" class="timer-svg-bg"/>
@@ -94,125 +98,126 @@
     </svg>
     <div class="timer-time" id="timerTime">00:30</div>
   </div>
-  <div style="text-align:center"><span class="timer-badge idle" id="timerBadge">灏辩华</span></div>
+  <div style="text-align:center"><span class="timer-badge idle" id="timerBadge">就绪</span></div>
   <div class="timer-presets">
-    <button class="timer-preset active" data-sec="30">30绉?/button>
-    <button class="timer-preset" data-sec="60">60绉?/button>
-    <button class="timer-preset" data-sec="90">90绉?/button>
-    <button class="timer-preset" data-sec="120">120绉?/button>
-    <button class="timer-preset" data-sec="180">3鍒?/button>
-    <button class="timer-preset" data-sec="300">5鍒?/button>
+    <button class="timer-preset active" data-sec="30">30秒</button>
+    <button class="timer-preset" data-sec="60">60秒</button>
+    <button class="timer-preset" data-sec="90">90秒</button>
+    <button class="timer-preset" data-sec="120">120秒</button>
+    <button class="timer-preset" data-sec="180">3分</button>
+    <button class="timer-preset" data-sec="300">5分</button>
   </div>
   <div class="timer-custom-wrap">
-    <span style="font-size:14px;color:#8e8e93">鑷畾涔夛細</span>
-    <input type="number" id="timerCustom" min="1" max="3600" placeholder="绉?>
-    <button class="timer-preset" id="timerCustomBtn" style="min-width:auto;padding:10px 16px">璁惧畾</button>
+    <span style="font-size:14px;color:var(--text-secondary)">自定义：</span>
+    <input type="number" id="timerCustom" min="1" max="3600" placeholder="秒">
+    <button class="timer-preset" id="timerCustomBtn" style="min-width:auto;padding:10px 16px">设定</button>
   </div>
   <div class="timer-ctrl">
-    <button class="timer-ctrl-start" id="timerStartBtn" onclick="timerStart()">鈻?寮€濮?/button>
-    <button class="timer-ctrl-pause" id="timerPauseBtn" onclick="timerPause()" style="display:none">鈴?鏆傚仠</button>
-    <button class="timer-ctrl-reset" onclick="timerReset()">鉄?閲嶇疆</button>
+    <button class="timer-ctrl-start" id="timerStartBtn" onclick="timerStart()">▶ 开始</button>
+    <button class="timer-ctrl-pause" id="timerPauseBtn" onclick="timerPause()" style="display:none">⏸ 暂停</button>
+    <button class="timer-ctrl-reset" onclick="timerReset()">🔄 重置</button>
   </div>
   <div class="audio-section" style="margin-top:16px">
     <div class="audio-row">
-      <label><input type="checkbox" id="timerVoiceToggle" checked> 鈴?璇煶鎾姤</label>
+      <label><input type="checkbox" id="timerVoiceToggle" checked> 🔊 语音播报</label>
     </div>
   </div>
-  <button class="back-btn" onclick="timerStopAll();go('pageHome')">鈫?杩斿洖</button>
+  <button class="back-btn" onclick="timerStopAll();go('pageHome')">← 返回</button>
 </div>
 <div class="page" id="pageRole">
-  <div class="head">馃幁 韬唤鍒嗛厤</div>
+  <div class="head">🎭 身份分配</div>
   <select class="role-select" id="rolePreset">
-    <option value="鐙间汉脳1,骞虫皯脳4">5浜猴細鐙间汉1 骞虫皯4</option>
-    <option value="鐙间汉脳2,骞虫皯脳3">5浜猴細鐙间汉2 骞虫皯3</option>
-    <option value="鐙间汉脳2,骞虫皯脳4,棰勮█瀹睹?">7浜?/option>
-    <option value="鐙间汉脳3,骞虫皯脳6,棰勮█瀹睹?">10浜?/option>
-    <option value="鐙间汉脳3,骞虫皯脳7,棰勮█瀹睹?,濂冲帆脳1">12浜?/option>
+    <option value="狼人×1,平民×4">5人：狼人1 平民4</option>
+    <option value="狼人×2,平民×3">5人：狼人2 平民3</option>
+    <option value="狼人×2,平民×4,预言家×1">7人：狼人2 平民4 预言家1</option>
+    <option value="狼人×3,平民×6,预言家×1">10人：狼人3 平民6 预言家1</option>
+    <option value="狼人×3,平民×7,预言家×1,女巫×1">12人：狼人3 平民7 预言家1 女巫1</option>
   </select>
-  <button class="save-set" onclick="buildRoles()">馃幉 鐢熸垚韬唤</button>
+  <button class="save-set" onclick="buildRoles()">🎲 生成身份</button>
   <div class="avatar-grid" id="roleAvatars"></div>
   <div class="audio-section">
-    <h4>馃攰 闊抽鎺у埗</h4>
-    <div class="audio-row"><label><input type="checkbox" id="roleVoiceToggle" checked> 鎾姤韬唤</label></div>
-    <div class="audio-row"><label style="flex:1">馃幍 鑳屾櫙闊充箰</label><span class="audio-time" id="bgmTime">00:00 / 00:00</span></div>
+    <h4>🔊 音频控制</h4>
+    <div class="audio-row"><label><input type="checkbox" id="roleVoiceToggle" checked> 播报身份</label></div>
+    <div class="audio-row"><label style="flex:1">🎵 背景音乐</label><span class="audio-time" id="bgmTime">00:00 / 00:00</span></div>
     <div class="audio-row">
       <input type="file" accept="audio/*" class="audio-file-input" id="bgmInput">
-      <button class="audio-btn" onclick="document.getElementById('bgmInput').click()">馃搧 閫夋嫨闊充箰</button>
-      <button class="audio-btn pri" id="bgmPlayBtn" onclick="bgmPlay()">鈻?鎾斁</button>
-      <button class="audio-btn" onclick="bgmStop()">鈴?鍋滄</button>
-      <label>闊抽噺 <input type="range" class="audio-slider" id="bgmVolume" value="50" oninput="bgmSetVolume()"></label>
-      <label><input type="checkbox" id="bgmLoop" checked> 寰幆</label>
+      <button class="audio-btn" onclick="document.getElementById('bgmInput').click()">📧 选择音乐</button>
+      <button class="audio-btn pri" id="bgmPlayBtn" onclick="bgmPlay()">▶ 播放</button>
+      <button class="audio-btn" onclick="bgmStop()">⏹ 停止</button>
+      <label>音量 <input type="range" class="audio-slider" id="bgmVolume" value="50" oninput="bgmSetVolume()"></label>
+      <label><input type="checkbox" id="bgmLoop" checked> 循环</label>
     </div>
     <div class="audio-row">
-      <label style="flex:1">馃敂 鑷畾涔夐煶鏁?/label>
+      <label style="flex:1">🔔 自定义音效</label>
       <input type="file" accept="audio/*" class="audio-file-input" id="sfxInput">
-      <button class="audio-btn" onclick="document.getElementById('sfxInput').click()">馃搧 閫夋嫨闊虫晥</button>
-      <button class="audio-btn pri" onclick="sfxPlay()">鈻?鎾斁</button>
+      <button class="audio-btn" onclick="document.getElementById('sfxInput').click()">📧 选择音效</button>
+      <button class="audio-btn pri" onclick="sfxPlay()">▶ 播放</button>
     </div>
   </div>
-  <button class="back-btn" onclick="go('pageHome')">鈫?杩斿洖</button>
+  <button class="back-btn" onclick="go('pageHome')">← 返回</button>
 </div>
 <div class="pop" id="rolePop">
   <div class="pop-inner">
     <div id="roleInfo" style="font-size:18px;text-align:center"></div>
-    <button class="pop-close" onclick="closeRole()">鍏抽棴</button>
+    <button class="pop-close" onclick="closeRole()">关闭</button>
   </div>
 </div>
 <div class="page" id="pageScore">
-  <div class="head">馃弳 璁″垎鏉?/div>
+  <div class="head">🏳️ 计分板</div>
   <div class="score-round-bar">
-    <span class="rlabel" id="scoreRoundLabel">绗?1 灞€</span>
-    <button class="score-btn-new" onclick="scoreNewRound()">鉃?鏂板眬</button>
-    <button class="score-btn-detail" onclick="scoreShowDetail()">馃搳 璇︽儏</button>
-    <button class="score-btn-rs" onclick="scoreReset()">馃攧 閲嶇疆</button>
+    <span class="rlabel" id="scoreRoundLabel">第 1 局</span>
+    <button class="score-btn-new" onclick="scoreNewRound()">➕ 新局</button>
+    <button class="score-btn-detail" onclick="scoreShowDetail()">📳 详情</button>
+    <button class="score-btn-rs" onclick="scoreReset()">🔄 重置</button>
   </div>
   <div id="scoreList"></div>
-  <button class="back-btn" onclick="go('pageHome')">鈫?杩斿洖</button>
+  <button class="back-btn" onclick="go('pageHome')">← 返回</button>
 </div>
 <div class="pop" id="scorePop">
   <div class="pop-inner">
-    <h3>馃搳 鍚勫眬璇︽儏</h3>
+    <h3>📳 各局详情</h3>
     <div id="scoreDetailList"></div>
-    <button class="pop-close" onclick="document.getElementById('scorePop').style.display='none'">鍏抽棴</button>
+    <button class="pop-close" onclick="document.getElementById('scorePop').style.display='none'">关闭</button>
   </div>
 </div>
 <div class="page" id="pageWord">
-  <div class="head">馃摉 鐚滆瘝</div>
+  <div class="head">📋 猜词</div>
   <select class="word-select" id="wordBank">
-    <option value="animals">馃惥 鍔ㄧ墿</option>
-    <option value="fruits">馃崕 姘存灉</option>
-    <option value="sports">鈿?杩愬姩</option>
-    <option value="jobs">馃憯 鑱屼笟</option>
-    <option value="movies">馃幀 鐢靛奖</option>
-    <option value="foods">馃崪 缇庨</option>
-    <option value="custom">鉁忥笍 鑷畾涔?/option>
+    <option value="animals">🐥 动物</option>
+    <option value="fruits">🍕 水果</option>
+    <option value="sports">⚽ 运动</option>
+    <option value="jobs">👯 职业</option>
+    <option value="movies">🎀 电影</option>
+    <option value="foods">🍪 美食</option>
+    <option value="custom">✏️ 自定义</option>
   </select>
   <div class="word-custom-row" id="wordCustomRow" style="display:none">
-    <input type="text" id="wordCustomInput" placeholder="杈撳叆璇嶈锛岀敤閫楀彿鍒嗛殧锛堝锛氱尗,鐙?鍏斿瓙锛?>
-    <button style="padding:12px 16px;background:#007aff;color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:500;cursor:pointer" onclick="importCustomWords()">瀵煎叆</button>
+    <input type="text" id="wordCustomInput" placeholder="输入词语，用逗号分隔（如：猫,狗,兔子）">
+    <button style="padding:12px 16px;background:var(--accent-gold);color:#1a1a2e;border:none;border-radius:10px;font-size:14px;font-weight:500;cursor:pointer" onclick="importCustomWords()">导入</button>
   </div>
-  <div class="word-display"><div class="word-text hidden" id="wordText">鐐瑰嚮涓嬫柟寮€濮?/div></div>
-  <div class="word-counter" id="wordCounter">绗?0 / 0 涓瘝</div>
+  <div class="word-display"><div class="word-text hidden" id="wordText">点击下方开始</div></div>
+  <div class="word-counter" id="wordCounter">第 0 / 0 个词</div>
   <div class="word-ctrl">
-    <button class="word-ctrl-toggle" onclick="toggleWord()">馃憗 鏄剧ず</button>
-    <button class="word-ctrl-next" onclick="nextWord()">鈻?涓嬩竴涓?/button>
-    <button class="word-ctrl-shuffle" onclick="shuffleWords()">馃攢 闅忔満</button>
-    <button class="word-ctrl-reset" onclick="resetWords()">馃攧 閲嶇疆</button>
+    <button class="word-ctrl-toggle" onclick="toggleWord()">👁 显示</button>
+    <button class="word-ctrl-next" onclick="nextWord()">▶ 下一个</button>
+    <button class="word-ctrl-shuffle" onclick="shuffleWords()">🔄 随机</button>
+    <button class="word-ctrl-reset" onclick="resetWords()">🔄 重置</button>
   </div>
-  <button class="back-btn" onclick="go('pageHome')">鈫?杩斿洖</button>
+  <button class="back-btn" onclick="go('pageHome')">← 返回</button>
 </div>
-<script src="js/app.js"></script>
 
 <div class="msg-editor" id="msgEditor">
   <div class="msg-editor-inner">
-    <h3>鉁忥笍 鑷畾涔夋伓鎼炴秷鎭?/h3>
-    <textarea id="msgTextarea" placeholder="姣忚涓€涓秷鎭?.."></textarea>
-    <div class="msg-hint">姣忚杈撳叆涓€涓秷鎭紝鎶戒腑璧峰鐜╁鍚庨殢鏈烘樉绀?/div>
+    <h3>✏️ 自定义恶搞消息</h3>
+    <textarea id="msgTextarea" placeholder="每行一个消息..."></textarea>
+    <div class="msg-hint">每行输入一个消息，抽中起始玩家后随机显示</div>
     <div class="msg-btns">
-      <button class="msg-save" onclick="saveMsgEditor()">馃捑 淇濆瓨</button>
-      <button class="msg-cancel" onclick="document.getElementById('msgEditor').style.display='none'">鍙栨秷</button>
+      <button class="msg-save" onclick="saveMsgEditor()">💾 保存</button>
+      <button class="msg-cancel" onclick="document.getElementById('msgEditor').style.display='none'">取消</button>
     </div>
   </div>
 </div>
+
+<script src="js/app.js"></script>
 </body>
 </html>
