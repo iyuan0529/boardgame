@@ -1,0 +1,62 @@
+﻿name: Build Android APK
+
+on:
+  workflow_dispatch:
+    inputs:
+      manifest_url:
+        description: 'PWA Manifest URL'
+        required: false
+        default: 'https://iyuan0529.github.io/boardgame/manifest.json'
+  push:
+    branches: [main]
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Bubblewrap
+        run: npm install -g @bubblewrap/cli
+
+      - name: Generate APK with Bubblewrap
+        run: |
+          MANIFEST="${{ github.event.inputs.manifest_url || 'https://iyuan0529.github.io/boardgame/manifest.json' }}"
+          echo "Using manifest: $MANIFEST"
+          npx @bubblewrap/cli init \
+            --manifest="$MANIFEST" \
+            --directory=./twa-app \
+            --appVersionName="1.0.0" \
+            --appVersionCode=1
+
+      - name: Build APK
+        run: |
+          cd twa-app
+          # Accept Android SDK licenses
+          echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --licenses > /dev/null 2>&1 || true
+          npx @bubblewrap/cli build
+        env:
+          ANDROID_HOME: ${{ env.ANDROID_HOME }}
+          JAVA_HOME: ${{ env.JAVA_HOME }}
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: boardgame-apk
+          path: twa-app/app/build/outputs/apk/release/*.apk
+          if-no-files-found: warn
