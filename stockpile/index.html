@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+  <title>股市预测 - 桌游助手</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+  .header-bar{position:fixed;top:0;left:0;right:0;z-index:999;padding:8px 12px;display:flex;align-items:center;gap:8px}
+  .back-home{background:rgba(0,0,0,0.3);border:none;color:#fff;font-size:14px;padding:8px 14px;border-radius:8px;cursor:pointer}
+  .back-home:active{background:rgba(0,0,0,0.5)}
+  .title-tip{color:rgba(255,255,255,0.8);font-size:13px;text-shadow:0 1px 3px rgba(0,0,0,0.5);flex:1;text-align:center;margin-right:40px}
+  </style>
+</head>
+<body>
+  <div class="header-bar">
+    <button class="back-home" onclick="window.location.href='../index.html'">← 返回</button>
+    <div class="title-tip">点击箭头，预测股票走势</div>
+  </div>
+  <div id="bg"></div>
+  <div id="animals"></div>
+  <div id="slotmachine" class="slotmachine">
+    <div class="slotmachine__set slotmachine__set--1">
+      <div id="wheel1" class="slotmachine__wheel slotWheel slotWheel--1">
+        <div class="slotWheel__gif slotWheel--1__gif"></div>
+        <div class="slotWheel__number slotWheel--1__number"></div>
+        <div class="slotWheel__border"></div>
+      </div>
+      <div id="wheel2" class="slotmachine__wheel slotWheel slotWheel--2">
+        <div class="slotWheel__gif slotWheel--2__gif"></div>
+        <div class="slotWheel__number slotWheel--2__number"></div>
+        <div class="slotWheel__border"></div>
+      </div>
+      <div id="wheel3" class="slotmachine__wheel slotWheel slotWheel--3">
+        <div class="slotWheel__gif slotWheel--3__gif"></div>
+        <div class="slotWheel__number slotWheel--3__number"></div>
+        <div class="slotWheel__border"></div>
+      </div>
+    </div>
+    <div class="slotmachine__set slotmachine__set--2">
+      <div id="wheel4" class="slotmachine__wheel slotWheel slotWheel--4">
+        <div class="slotWheel__gif slotWheel--4__gif"></div>
+        <div class="slotWheel__number slotWheel--4__number"></div>
+        <div class="slotWheel__border"></div>
+      </div>
+      <div id="wheel5" class="slotmachine__wheel slotWheel slotWheel--5">
+        <div class="slotWheel__gif slotWheel--5__gif"></div>
+        <div class="slotWheel__number slotWheel--5__number"></div>
+        <div class="slotWheel__border"></div>
+      </div>
+      <div id="wheel6" class="slotmachine__wheel slotWheel slotWheel--6">
+        <div class="slotWheel__gif slotWheel--6__gif"></div>
+        <div class="slotWheel__number slotWheel--6__number"></div>
+        <div class="slotWheel__border"></div>
+      </div>
+    </div>
+  </div>
+  <div id="bg-oval">
+    <img src="images/arrow.png" id="arrow">
+    <img src="images/button.png" id="roll-button" class="roll-button">
+  </div>
+  <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
