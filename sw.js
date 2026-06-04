@@ -1,11 +1,11 @@
-const CACHE = 'boardgame-v2';
+﻿const CACHE = 'boardgame-v3';
 const URLS = [
-  'index.html',
-  'manifest.json',
-  'css/style.css',
-  'js/app.js',
-  'icons/icon-192.png',
-  'icons/icon-512.png'
+  '/boardgame/index.html',
+  '/boardgame/manifest.json',
+  '/boardgame/css/style.css',
+  '/boardgame/js/app.js',
+  '/boardgame/icons/icon-192.png',
+  '/boardgame/icons/icon-512.png'
 ];
 self.addEventListener('install', function(e) {
   e.waitUntil(caches.open(CACHE).then(function(c) {
@@ -21,7 +21,7 @@ self.addEventListener('fetch', function(e) {
     caches.match(e.request).then(function(r) {
       return r || fetch(e.request);
     }).catch(function() {
-      return caches.match('index.html');
+      return caches.match('/boardgame/index.html');
     })
   );
 });
